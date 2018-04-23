@@ -13,24 +13,57 @@
 				<img src="images/logo.png" />
 			</div>
 			<div >
-				
+				<a onclick="createNew()"><i class="fa fa-file"></i></a>
+				<a ><i class="fa fa-folder-open"></i></a>
+				<a ><i class="fa fa-save"></i></a>
+				<a ><i class="fa fa-reply"></i></a>
+				<a ><i class="fa fa-share"></i></a>
+				<hr />
+				<a ><i class="fa fa-upload"></i></a>
 			</div>
 		</div>
 		<div class="main_container" id="container">
 			
 		</div>
 		<div class="setting_panel">
-			
-			
+			<div class="panel_header">Material </div>
+			<div class="material_setting">
+				<div class="material">
+					<div class="preview"></div>
+					<div class="material_detail">
+						<div class="material_name"> Test Material </div>
+						<div class="material_btns">
+							<a ><i class="fa fa-search"></i></a>
+							<a ><i class="fa fa-remove"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="panel_header">UV </div>
+			<div class="material_setting">
+			</div>
 		</div>
 	</body>
 
 
     <script src="./build/three.js"></script>
-    <script>
-    	
+    <script src="./js/controls/EditorControls.js"></script>
+    <script src="./js/ModelEditor.js"></script>
+    <script src="./js/pmrem/PMREMCubeUVPacker.js"></script>
+    <script src="./js/pmrem/PMREMGenerator.js"></script>
 
-		
+    <!-- READERS -->
+
+    <script src="./js/libs/Inflate.min.js"></script>
+    <script src="./js/loaders/FBXLoader.js"></script>
+
+    <script>
+    	function createNew(){
+    		if(confirm('Any unsaved data will be lost! \nAre you sure?')){
+	    		modelEditor.clear();
+	    		modelEditor.modelInput.click();
+    		}
+    	}
     </script>
 
 </html>
