@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 		<title>Model Editor</title>
 		<link href="css/main.css" rel="stylesheet" type="text/css" /> 
 		<link href="font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" /> 
@@ -22,10 +23,57 @@
 				<a ><i class="fa fa-upload"></i></a>
 			</div>
 		</div>
-		<div class="main_container" id="container">
+		<div class="main_container">
 			
 		</div>
 		<div class="setting_panel">
+			<div class="panel_header">Common </div>
+			<div class="material_setting">
+				<div class="form_group">
+					<label>单位</label>
+					<div>
+						<select>
+							<option>米</option>
+							<option>分米</option>
+							<option>厘米</option>
+							<option>毫米</option>
+							<option>英尺</option>
+							<option>英寸</option>
+						</select>
+					</div>
+				</div>
+				<div class="form_group">
+					<label>锚点坐标</label>
+					<div>
+						<input type="text" placeholder="x">
+					</div>
+
+					<div>
+						<input type="text" placeholder="y">
+					</div>
+
+					<div>
+						<input type="text" placeholder="z">
+					</div>
+				</div>
+				<div class="form_group">
+					<label>旋转</label>
+					<div>
+						<input type="text" placeholder="x">
+					</div>
+
+					<div>
+						<input type="text" placeholder="y">
+					</div>
+
+					<div>
+						<input type="text" placeholder="z">
+					</div>
+				</div>
+				<div class="form_group">
+					<a >重新计算顶点坐标</a>
+				</div>
+			</div>
 			<div class="panel_header">Material </div>
 			<div class="material_setting">
 				<div class="material">
@@ -34,14 +82,15 @@
 						<div class="material_name"> Test Material </div>
 						<div class="material_btns">
 							<a ><i class="fa fa-search"></i></a>
+							<a ><i class="fa fa-edit"></i></a>
 							<a ><i class="fa fa-remove"></i></a>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="panel_header">UV </div>
+			<!-- <div class="panel_header">UV </div>
 			<div class="material_setting">
-			</div>
+			</div> -->
 		</div>
 	</body>
 
@@ -52,8 +101,11 @@
     <script src="./js/pmrem/PMREMCubeUVPacker.js"></script>
     <script src="./js/pmrem/PMREMGenerator.js"></script>
 
-    <!-- READERS -->
 
+    <script src="./js/Picker.js"></script>
+    <script src="./js/SettingPanel.js"></script>
+
+    <!-- READERS -->
     <script src="./js/libs/Inflate.min.js"></script>
     <script src="./js/loaders/FBXLoader.js"></script>
 

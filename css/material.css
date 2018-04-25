@@ -55,10 +55,12 @@ body{
 	width:4000px;
 	flex-grow : 1;
 	flex-shrink : 1;
+	background-color: #333;
+	border-right:1px solid #777;
 }
 
 .setting_panel{
-	width : 400px;
+	width : 340px;
 	height:100%;
 	background-color:#666;
 	flex-shrink : 0;
@@ -71,7 +73,9 @@ body{
 	color:#FFF;
 	background-color:#555;
 }
-
+.setting_panel .material_preview{
+	height:300px;
+}
 .setting_panel .material_setting{
 	padding:15px;
 }

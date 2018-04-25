@@ -20,7 +20,7 @@ var ModelEditor = function(){
 
 	container.appendChild( renderer.domElement );
 
-	camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+	camera = new THREE.PerspectiveCamera( 45, container.clientWidth / container.clientHeight, 1, 2000 );
 	camera.position.x = 30;
 	camera.position.y = 10;
 	camera.position.z = 30;
@@ -61,7 +61,6 @@ var ModelEditor = function(){
 
 		textureCube.format = THREE.RGBFormat;
 		textureCube.mapping = THREE.CubeReflectionMapping;
-		//textureCube.generateMipmaps = false;
 		return textureCube;
 	}
 
@@ -107,6 +106,10 @@ var ModelEditor = function(){
 	}
 
 	this.reader = new FileReader();
+
+
+	this.picker = new Picker(container, scene, camera);
+	this.settingPanel = new SettingPanel();
 }
 
 ModelEditor.prototype = {
@@ -119,33 +122,40 @@ ModelEditor.prototype = {
 		}	
 	},
 	addToScene : function(model){
-		if(model instanceof THREE.Group && model.children.length == 1){
-			model = model.children[0];
-		}else if( ! model instanceof THREE.Mesh){
-			throw 'It\'s not a mesh or group';
-		}
-		console.log(model);
-		model.material.envMap = this.cubeRenderTarget.texture;
-		model.material.needsUpdate = true;
 
+		this.addEnvMap(model);
+		
 		model.geometry.computeBoundingSphere();
 
 		var center = model.geometry.boundingSphere.center;
-
 		var radius = model.geometry.boundingSphere.radius;
-		model.scale.multiplyScalar( 20 /(20 + radius ));
 
-		model.geometry.computeBoundingSphere();
-		model.geometry.computeBoundingBox();
+		console.log(radius);
+		console.log(center);
 
-		this.initSettingPanel();
+		model.scale.multiplyScalar( 5 / radius );
+		model.position.sub(center.clone().negate());
 
+		// model.geometry.computeBoundingSphere();
+		// model.geometry.computeBoundingBox();
+
+		this.settingPanel.init(model);
+		console.log(center.clone().negate());
 		this.scene.add(model);
+		console.log(model);
+
+	},
+	addEnvMap : function(model){
+		if(model.children && model.children.length > 0){
+			for(var i = 0, l = model.children.length; i < l; i++){
+				this.addEnvMap(model.children[i]);
+			}
+		}else if(model instanceof THREE.Mesh){
+			model.material.envMap = this.cubeRenderTarget.texture;
+			model.material.needsUpdate = true;
+		}
 	},
 
-	initSettingPanel : function(){
-		
-	},
 	bindEvent : function(){
 
 	},
@@ -169,8 +179,17 @@ ModelEditor.prototype = {
 		console.log(data);
 		var loader = new THREE.FBXLoader();
 		var object = loader.parse( data );
-		this.addToScene(object);
+		// if(object instanceof THREE.Group){
+		// 	this.addToScene(object.children);
+		// }else if(object instanceof THREE.Mesh){
+		// 	this.addToScene([object])
+		// }
+		var model = object.children[0];
+		this.addToScene(model);
 	},
 }
 
-var modelEditor = new ModelEditor();
+var modelEditor;
+window.onload = function(){
+	modelEditor = new ModelEditor();
+}
