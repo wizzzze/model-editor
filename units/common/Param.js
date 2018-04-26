@@ -14,6 +14,6 @@ ParamUnit.prototype = {
 	getShader : function(){
 		var shader = 'float '+ this.name + ' = ' + this.value;
 		this.shaderOutputed = true;
-		return { shader : shader};
+		return { shader : shader };
 	}
 }

@@ -2,7 +2,22 @@ var MaterialEditor = function(){
 	var self = this;
 
 	var container = document.getElementById('material_preview');
-	console.log(container);
+
+	var unitContainer = document.getElementById('container');
+
+	unitContainer.ondrop = function(e){
+		console.log(e);
+		var data = e.dataTransfer.getData("Text");
+		var dom = document.getElementById(data);
+		console.log(dom)
+		dom.style.top = e.offsetY + 'px';
+		dom.style.left = e.offsetX + 'px';
+	}
+
+	unitContainer.ondragover = function(e){
+		e.preventDefault();
+	}
+
 	var camera, scene, renderer;
 
 
@@ -22,19 +37,12 @@ var MaterialEditor = function(){
 	camera.position.z = 10;
 	camera.lookAt(0,0,0);
 
-	var controls = new THREE.TrackballControls( camera );
+	var controls = new THREE.TrackballControls( camera , container);
 
 	controls.rotateSpeed = 3.0;
-	// controls.zoomSpeed = 1.2;
-	// controls.panSpeed = 0.8;
 
 	controls.staticMoving = true;
 	controls.dynamicDampingFactor = 0.3;
-
-	// controls.addEventListener( 'change', render );
-
-	// controls.noZoom = false;
-	// controls.noPan = false;
 
 	scene = new THREE.Scene();
 
@@ -88,7 +96,12 @@ var MaterialEditor = function(){
 		renderer.render( scene, camera );
 	}
 	animate();
+
+	var units = new MaterialUnitToolBar(unitContainer);
 }
 
+var materialEditor;
+window.onload = function(){
+	materialEditor = new MaterialEditor();
 
-var materialEditor = new MaterialEditor();
+}
