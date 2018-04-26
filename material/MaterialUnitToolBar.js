@@ -2,10 +2,9 @@ var units  = [
 	LerpUnit, MultiplyUnit, ParamUnit, TextureUnit
 ]
 
-var MaterialUnitToolBar = function(unitContainer){
-	
-	this.container = document.getElementById('units_container');
-	this.unitContainer = unitContainer;
+var MaterialUnitToolBar = function(container, app){
+	this.container = container;
+	this.app = app;
 	for(var i = 0, l = units.length; i < l; i++){
 		this.getUnitBtn(units[i]);
 	}
@@ -19,10 +18,8 @@ MaterialUnitToolBar.prototype = {
 		btn.innerText = unitConstruct.name;
 		this.container.appendChild(btn);
 		btn.onclick = function(){
-			console.log(unitConstruct);
 			var unit = new unitConstruct();
-			console.log(unit);
-			self.unitContainer.appendChild(unit.dom);
-		}	
+			unit.createDom(self.app);
+		}
 	}
 }

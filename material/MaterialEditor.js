@@ -3,20 +3,12 @@ var MaterialEditor = function(){
 
 	var container = document.getElementById('material_preview');
 
-	var unitContainer = document.getElementById('container');
-
-	unitContainer.ondrop = function(e){
-		console.log(e);
-		var data = e.dataTransfer.getData("Text");
-		var dom = document.getElementById(data);
-		console.log(dom)
-		dom.style.top = e.offsetY + 'px';
-		dom.style.left = e.offsetX + 'px';
-	}
-
-	unitContainer.ondragover = function(e){
-		e.preventDefault();
-	}
+	var unitContainer = document.getElementById('units_container');
+	
+	var app = new PIXI.Application({width: document.getElementById('container').clientWidth, height: document.getElementById('container').clientHeight});
+	app.renderer.backgroundColor = 0x555555;
+	//Add the canvas that Pixi automatically created for you to the HTML document
+	document.getElementById('container').appendChild(app.view);
 
 	var camera, scene, renderer;
 
@@ -97,7 +89,7 @@ var MaterialEditor = function(){
 	}
 	animate();
 
-	var units = new MaterialUnitToolBar(unitContainer);
+	var units = new MaterialUnitToolBar(unitContainer, app);
 }
 
 var materialEditor;

@@ -6,7 +6,16 @@ var LerpUnit = function(){
 	lerpCount++;
 
 	this.shaderOutputed = false;
-	this.createDom();
+	this.width = 130;
+	this.height = 120;
+
+	this.input = [
+		{ name : 'A', type : GENTYPE },
+		{ name : 'B', type : GENTYPE },
+		{ name : 'Alpha', type : FLOAT },
+	];
+
+	this.output = [  ];
 }
 
 

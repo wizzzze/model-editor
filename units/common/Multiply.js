@@ -6,7 +6,15 @@ var MultiplyUnit = function(){
 	this.name = 'multiplyUnit_'+ multiplyCount;
 	multiplyCount++;
 	this.shaderOutputed = false;
-	this.createDom();
+	this.width = 140;
+	this.height = 90;
+
+	this.input = [
+		{ name : 'A', type : GENTYPE },
+		{ name : 'B', type : GENTYPE },
+	];
+
+	this.output = [  ];
 }
 
 MultiplyUnit.prototype = Object.create( Unit.prototype );
